@@ -1,33 +1,21 @@
+import React from 'react';
 import './App.css';
-import axios from "axios";
-import {useEffect, useState} from "react";
+import {BrowserRouter,Route,Routes} from "react-router-dom";
+import Home from './pages/Home.js';
+import Header from './components/Header.js';
+import CreateMarke from './pages/CreateMarke';
 
 const App=()=> {
 
-  const [listOfMarke,setListOfMarke]=useState([]);
-
-  useEffect(()=>{
-    axios.get('http://localhost:3001/marke').then((response)=>{
-      setListOfMarke(response.data);
-
-    })
-  },[]);
-
-  const renderList=listOfMarke.map((value,key)=>{
-      return (
-      <div className=''>
-        <div className='title'>
-          {value.NazivMarke}
-        </div>
-        <div className='date'>
-          {value.updatedAt}
-        </div>
-      </div>)
-    })
-
   return (
     <div className="App">
-     {renderList}
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/" exact element={<Home/>} />
+        <Route path='/createMarke' exact element={<CreateMarke/>}/>
+      </Routes> 
+    </BrowserRouter>
     </div>
   );
 }
