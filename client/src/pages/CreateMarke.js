@@ -2,13 +2,18 @@ import React from 'react';
 import {connect} from "react-redux";
 import {createMarke} from '../actions';
 import NewMarkeForm from '../components/NewMarkeForm';
+import withRouter from '../components/WithRouter';
+
 
 class CreateMarke extends React.Component{
     onSubmit=(formValues)=>{
       //formValues sadrzi sve podatke forme sa njihovim name propertijem
       //console.log(formValues);
       this.props.createMarke(formValues);
+      this.props.navigate('/');
     }
+
+   
 
     render(){
         return (
@@ -20,4 +25,4 @@ class CreateMarke extends React.Component{
     }
 }
 
-export default connect(null,{createMarke})(CreateMarke);
+export default withRouter(connect(null,{createMarke})(CreateMarke));

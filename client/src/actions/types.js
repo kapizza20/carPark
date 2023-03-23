@@ -1,2 +1,5 @@
 export const FETCH_MARKE='FETCH_MARKE';
 export const CREATE_MARKE='CREATE_MARKE';
+export const FETCH_MARKU='FETCH_MARKU';
+export const UPDATE_MARKE='UPDATE_MARKE';
+export const DELETE_MARKE='DELETE_MARKE';

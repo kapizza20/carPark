@@ -4,7 +4,13 @@
     "password": "pass",
     "database": "vozni_park",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "pool":{
+      "max":10,
+      "min":0,
+      "acquire":30000,
+      "idle":10000
+    }
   },
   "test": {
     "username": "root",

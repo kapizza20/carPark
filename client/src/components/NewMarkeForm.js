@@ -55,11 +55,21 @@ class NewMarkeForm extends React.Component{
 }
 
 const validate=(formValues)=>{
-   const errors={};
    
+   const errors={};
    if(!formValues.NazivMarke){
       //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
       errors.NazivMarke="Morate uneti naziv marke";
+   }
+   if(formValues.NazivMarke){
+   if(formValues.NazivMarke.length>30){
+      //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
+      errors.NazivMarke="Naziv marke mora biti manji od 30 karaktera";
+   }
+   // if(formValues.NazivMarke.replace("<", '')){
+   //    //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
+   //    errors.NazivMarke="";
+   // }
    }
    return errors;
 }

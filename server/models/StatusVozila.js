@@ -1,29 +1,26 @@
 //u nodu se ovako exportuje
 module.exports=(sequelize,DataTypes)=>{
-    const MarkeVozila=sequelize.define("MarkeVozila",{
-      IDMarkeVozila:{
+    const StatusVozila=sequelize.define("StatusVozila",{
+      IDStatusa:{
         type:DataTypes.INTEGER,
         allowNull:false,
         autoIncrement: true,
         primaryKey: true
       },
-      NazivMarke:{
-        type:DataTypes.STRING(30),
+      NazivStatusa:{
+        type:DataTypes.STRING(20),
         allowNull:false
       }
-      
     })
-
-    MarkeVozila.associate = function (models) {
-       MarkeVozila.hasMany(models.Vozila,{
+    StatusVozila.associate = function (models) {
+    StatusVozila.hasMany(models.Vozila,{
          foreignKey: {
-         name: 'IDMarkeVozila',
+         name: 'IDStatusa',
          type: DataTypes.INTEGER,
          allowNull:false
       },
         onDelete:"CASCADE",
         onUpdate:"CASCADE"
-      })
-    }
-    return MarkeVozila;
-}
+      })}
+    return StatusVozila;
+};

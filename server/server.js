@@ -13,12 +13,13 @@ const db=require('./models');
 const markeRouter=require('./routes/MarkeVozila.js');
 
 app.use('/marke',markeRouter);
-
+//Port je ili 3001 ili onaj koji nam je sam zadat od strane neceg sa strane
+const PORT=process.env.PORT || 3001
 //Sinhronizacija sa bazom preko sequelize
 db.sequelize.sync().then(()=>{
 //dodeljivanje porta i pokretanje servera
-app.listen(3001,()=>{
-    console.log('Server pokrenut, port 3001!')
+app.listen(PORT,()=>{
+    console.log(`Server pokrenut, port ${PORT}`)
 })
 
 });
