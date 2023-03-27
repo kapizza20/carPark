@@ -10,7 +10,7 @@ class CreateMarke extends React.Component{
       //formValues sadrzi sve podatke forme sa njihovim name propertijem
       //console.log(formValues);
       this.props.createMarke(formValues);
-      this.props.navigate('/');
+      this.props.navigate('/marke');
     }
 
    

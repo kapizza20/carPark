@@ -18,12 +18,11 @@ class DeleteMarke extends React.Component{
    }
 
    renderActions(){
-      
       const id=this.props.params.id;
       return(
       <React.Fragment>
-         <button onClick={()=>{this.props.deleteMarke(id);this.props.navigate('/');}} className="ui button negative">Delete</button>
-         <Link to={'/'} className="ui button">Cancel</Link>
+         <button onClick={()=>{this.props.deleteMarke(id);this.props.navigate('/marke');}} className="ui button negative">Delete</button>
+         <Link to={'/marke'} className="ui button">Cancel</Link>
       </React.Fragment>)
    }
 
@@ -33,7 +32,7 @@ class DeleteMarke extends React.Component{
             title="Obrisi marku vozila:"
             content={this.renderContent()}
             actions={this.renderActions()}
-            onDismiss={()=> this.props.navigate('/')}
+            onDismiss={()=> this.props.navigate('/marke')}
          />
       );
    };

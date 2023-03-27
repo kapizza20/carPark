@@ -1,31 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import withRouter from '../components/WithRouter';
-import { fetchMarku,updateMarke } from "../actions";
-import NewMarkeForme from "../components/NewMarkeForm";
+import { fetchTipovi, updateTipovi } from "../actions";
+import NewTipoviForm from "../components/NewTipoviForm";
 import _ from 'lodash';
 
-class EditMarke extends React.Component{
+class EditTipovi extends React.Component{
 
     componentDidMount(){
-        this.props.fetchMarku(this.props.params.id);
+        this.props.fetchTipovi(this.props.params.id);
         //console.log(this.props)
     }
 
     onSubmit=(formValues)=>{
         //console.log(this.props);
-        this.props.updateMarke(this.props.params.id, formValues);
-        this.props.navigate('/marke');
+        this.props.updateTipovi(this.props.params.id, formValues);
+        this.props.navigate('/tipovi');
     }
 
     render(){
-        if(!this.props.marka){
+        if(!this.props.tip){
          return <div>Loading...</div>
       }
       return (
          <div className="ui container">
             <h3>Izmena marke</h3>
-            <NewMarkeForme initialValues={_.pick(this.props.marka,'NazivMarke')}
+            <NewTipoviForm initialValues={_.pick(this.props.tip,'NazivTipa')}
              onSubmit={this.onSubmit}/>
          </div>
          
@@ -36,8 +36,8 @@ class EditMarke extends React.Component{
 }
 const mapStateToProps=(state, ownProps)=>{
     return{
-    marka: state.marke[ownProps.params.id]
+    tip: state.tipovi[ownProps.params.id]
     }
 }
 
-export default withRouter(connect(mapStateToProps,{fetchMarku,updateMarke})(EditMarke));
+export default withRouter(connect(mapStateToProps,{fetchTipovi,updateTipovi})(EditTipovi));

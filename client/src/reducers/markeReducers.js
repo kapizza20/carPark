@@ -10,7 +10,8 @@ export default (state={},action)=>{
         case FETCH_MARKU:
             return({...state, [action.payload.IDMarkeVozila]:action.payload});
         case UPDATE_MARKE:
-            return({...state});
+            
+            return({...state,});
         case DELETE_MARKE:
             return _.omit(state, action.payload);
         default:

@@ -1,40 +1,38 @@
 const express=require('express');
-const {MarkeVozila}=require('../models');
+const {TipoviVozila}=require('../models');
 const router=express.Router();
-
 
 router.get("/", async(req,res)=>{
     //res.send('Hi');
-    const listOfMarke=await MarkeVozila.findAll({
-        order:[['NazivMarke','ASC']]
+    const listOfTipovi=await TipoviVozila.findAll({
+        order:[['NazivTipa','ASC']]
     });
-    res.json(listOfMarke);
+    res.json(listOfTipovi);
 });
 
 router.post("/", async(req,res)=>{
     const data=req.body;
-    await MarkeVozila.create(data);
+    await TipoviVozila.create(data);
     res.json(data);  //potvrda
 });
 
-//koristicemo sequlize da lakse komuniciramo, moramo da kapiramo kako dobijamo podatke,ovde ce biti json, kao objekat, svaki objekat ima kao body(sve sto saljemo kao req)
 router.get("/edit/:id",async(req,res)=>{
     const id=req.params.id;
-    const mark=await MarkeVozila.findByPk(id); //findOne({where:{idMarke:id}})
+    const mark=await TipoviVozila.findByPk(id); //findOne({where:{idMarke:id}})
     res.json(mark);
 })  
 
 router.patch("/edit/:id",async(req,res)=>{
     //console.log(req.params);
     const id=req.params.id;
-    const mark=await MarkeVozila.update(req.body,{where:{IDMarkeVozila:id}});
+    const mark=await TipoviVozila.update(req.body,{where:{IDTipa:id}});
     res.json(mark);
 }) 
 
 router.delete("/delete/:id",async(req,res)=>{
     console.log(req.params)
     const id=req.params.id;
-    const mark=await MarkeVozila.destroy({where:{IDMarkeVozila:id}});
+    const mark=await TipoviVozila.destroy({where:{IDTipa:id}});
     res.json(mark);
 })
 
