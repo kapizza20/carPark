@@ -1,5 +1,5 @@
 import {FETCH_MARKE, CREATE_MARKE, FETCH_MARKU,UPDATE_MARKE, DELETE_MARKE,
-     CREATE_TIPOVI,FETCH_TIPOVI,FETCH_TIP,DELETE_TIPOVI,UPDATE_TIPOVI} from './types';
+     CREATE_TIPOVI,FETCH_TIPOVI,FETCH_TIP,DELETE_TIPOVI,UPDATE_TIPOVI, FETCH_STATUSI, CREATE_STATUSI, FETCH_STATUS, UPDATE_STATUSI, DELETE_STATUSI} from './types';
 import axios from "axios";
 
 const PORT='localhost:3001';
@@ -59,4 +59,32 @@ export const deleteTipovi=(id)=>async dispatch=>{
     //console.log(id);
     const response=await axios.delete(`http://${PORT}/tipovi/delete/${id}`,{id});
     dispatch({type:DELETE_TIPOVI, payload:id})
+}
+
+export const fetchStatusi=()=> async dispatch=>{
+    const response=await axios.get(`http://${PORT}/statusi`)
+        dispatch({type:FETCH_STATUSI, payload:response.data})
+    //console.log(response); -> promise
+}
+
+export const createStatusi=(formValues)=>async dispatch=>{
+    const response=await axios.post(`http://${PORT}/statusi`,{...formValues})
+        dispatch({type:CREATE_STATUSI, payload:response.data})
+}
+
+export const fetchStatus=(id)=> async dispatch=>{
+    const response=await axios.get(`http://${PORT}/statusi/edit/${id}`);
+        dispatch({type:FETCH_STATUS,payload:response.data}); 
+}
+
+export const updateStatusi=(id,formValues)=>async dispatch=>{
+    const response=await axios.patch(`http://${PORT}/statusi/edit/${id}`,{...formValues});
+    //console.log(response.config.data);
+    dispatch({type:UPDATE_STATUSI, payload:{res:response.config.data,id:id}})
+}
+
+export const deleteStatusi=(id)=>async dispatch=>{
+    //console.log(id);
+    const response=await axios.delete(`http://${PORT}/statusi/delete/${id}`,{id});
+    dispatch({type:DELETE_STATUSI, payload:id})
 }

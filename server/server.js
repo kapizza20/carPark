@@ -12,9 +12,12 @@ const db=require('./models');
 //Api endpoint /marke ->
 const markeRouter=require('./routes/MarkeVozila.js');
 const tipoviRouter=require('./routes/TipoviVozila')
+const statusiRouter=require('./routes/StatusiVozila')
 
 app.use('/marke',markeRouter);
 app.use('/tipovi',tipoviRouter);
+app.use('/statusi',statusiRouter);
+
 //Port je ili 3001 ili onaj koji nam je sam zadat od strane neceg sa strane
 const PORT=process.env.PORT || 3001
 //Sinhronizacija sa bazom preko sequelize
