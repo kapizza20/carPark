@@ -18,7 +18,7 @@ class CreateMarke extends React.Component{
     render(){
         return (
         <div className='ui container'>
-         <h3>Nova marka</h3>
+         <h3>Нова марка</h3>
          <NewMarkeForm onSubmit={this.onSubmit}></NewMarkeForm>
         </div>
       )

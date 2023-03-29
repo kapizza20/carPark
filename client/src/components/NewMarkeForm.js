@@ -27,7 +27,7 @@ class NewMarkeForm extends React.Component{
          */
         <div className={className}>
             <label>{label}</label>
-            <input placeholder="(BMW)" {...input}/>
+            <input placeholder="(BMW...)" {...input}/>
             {this.renderError(meta)}
         </div>
         
@@ -46,8 +46,8 @@ class NewMarkeForm extends React.Component{
       //handeSubmit je build in u redux form i ona radi ono osnovno e.preventDefault i to
       return (
          <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
-            <Field label="Unesi naziv marke" name="NazivMarke" component={this.renderInput}/>
-            <button className="ui button primary">Unesi</button>
+            <Field label="Унесите назив марке" name="NazivMarke" component={this.renderInput}/>
+            <button className="ui button primary">Унеси</button>
          </form>
       )
    }
@@ -59,12 +59,12 @@ const validate=(formValues)=>{
    const errors={};
    if(!formValues.NazivMarke){
       //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
-      errors.NazivMarke="Morate uneti naziv marke";
+      errors.NazivMarke="Морате унети назив марке";
    }
    if(formValues.NazivMarke){
    if(formValues.NazivMarke.length>30){
       //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
-      errors.NazivMarke="Naziv marke mora biti manji od 30 karaktera";
+      errors.NazivMarke="Назив марке мора бити мањи од 30 карактера";
    }
    // if(formValues.NazivMarke.replace("<", '')){
    //    //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju

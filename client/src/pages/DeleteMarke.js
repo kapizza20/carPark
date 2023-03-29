@@ -14,22 +14,22 @@ class DeleteMarke extends React.Component{
       if(!this.props.marka){
          return 'Loading...'
       }
-      return `Da li ste sigurni da zelite da obrisete: ${this.props.marka.NazivMarke}?`
+      return `Да ли сте сигурни да желите да обришете: ${this.props.marka.NazivMarke}?`
    }
 
    renderActions(){
       const id=this.props.params.id;
       return(
       <React.Fragment>
-         <button onClick={()=>{this.props.deleteMarke(id);this.props.navigate('/marke');}} className="ui button negative">Delete</button>
-         <Link to={'/marke'} className="ui button">Cancel</Link>
+         <button onClick={()=>{this.props.deleteMarke(id);this.props.navigate('/marke');}} className="ui button negative">Обриши</button>
+         <Link to={'/marke'} className="ui button">Одустани</Link>
       </React.Fragment>)
    }
 
    render(){
       return (
          <Modal
-            title="Obrisi marku vozila:"
+            title="Обриши марку:"
             content={this.renderContent()}
             actions={this.renderActions()}
             onDismiss={()=> this.props.navigate('/marke')}

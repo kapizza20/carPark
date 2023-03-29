@@ -24,7 +24,7 @@ class EditTipovi extends React.Component{
       }
       return (
          <div className="ui container">
-            <h3>Izmena marke</h3>
+            <h3>Izmena типа</h3>
             <NewTipoviForm initialValues={_.pick(this.props.tip,'NazivTipa')}
              onSubmit={this.onSubmit}/>
          </div>

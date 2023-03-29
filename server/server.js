@@ -11,12 +11,15 @@ const db=require('./models');
 //Exspress za rutiranje
 //Api endpoint /marke ->
 const markeRouter=require('./routes/MarkeVozila.js');
-const tipoviRouter=require('./routes/TipoviVozila')
-const statusiRouter=require('./routes/StatusiVozila')
+const tipoviRouter=require('./routes/TipoviVozila');
+const statusiRouter=require('./routes/StatusiVozila');
+const vozilaRouter=require('./routes/Vozila.js');
 
 app.use('/marke',markeRouter);
 app.use('/tipovi',tipoviRouter);
 app.use('/statusi',statusiRouter);
+app.use('/vozila',vozilaRouter);
+
 
 //Port je ili 3001 ili onaj koji nam je sam zadat od strane neceg sa strane
 const PORT=process.env.PORT || 3001

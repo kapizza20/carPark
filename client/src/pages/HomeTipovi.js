@@ -19,14 +19,14 @@ class HomeTipovi extends React.Component{
   // },[]);
   renderAdmin(tipovi){
    return(
-     <div className="right floated content">
+     <td style={{textAlign:"center"}}>
       <Link to={`/tipovi/editTipovi/${tipovi.IDTipa}`} className="ui button primary">
           Измени
       </Link>
       <Link to={`/tipovi/deleteTipovi/${tipovi.IDTipa}`} className="ui button negative">
           Обриши
       </Link>
-    </div>
+    </td>
   );
    }
 
@@ -95,10 +95,11 @@ class HomeTipovi extends React.Component{
       <button onClick={this.onSearchSubmit()} className="ui button" type="submit" >Претражи</button>
       <Link></Link>
     </div>
-    <table className="ui celled table">
+    <table className="ui selectable celled table">
       <thead>
         <tr>
-          <th>Назив типа</th>
+          <th style={{textAlign:"center"}}>Назив типа</th>
+          <th style={{textAlign:"center"}}>Функције</th>
         </tr>
       </thead>
       <tbody>

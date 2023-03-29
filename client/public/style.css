@@ -1,3 +1,6 @@
 body{
    background-color: rgb(241, 223, 216);
 }
+*td{
+   text-align: center;
+}

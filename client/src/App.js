@@ -18,6 +18,10 @@ import CreateStatusi from './pages/CreateStatusi';
 import EditStatusi from './pages/EditStatusi';
 import DeleteStatusi from './pages/DeleteStatusi';
 
+import HomeVozila from './pages/HomeVozila';
+import CreateVozila from './pages/CreateVozila';
+import EditVozila from './pages/EditVozila';
+import DeleteVozila from './pages/DeleteVozila';
 
 const App=()=> {
 
@@ -31,19 +35,27 @@ const App=()=> {
         <Route path="/marke/createMarke" exact element={<CreateMarke/>}/>
         <Route path="/marke/editMarke/:id" exact element={<EditMarke/>}/>
         <Route path="/marke/deleteMarke/:id" exact element={<DeleteMarke/>}/>
+
         <Route path='/tipovi' exact element={<HomeTipovi/>}/>
         <Route path="/tipovi/createTipovi" exact element={<CreateTipovi/>}/>
         <Route path="/tipovi/editTipovi/:id" exact element={<EditTipovi/>}/>
         <Route path="/tipovi/deleteTipovi/:id" exact element={<DeleteTipovi/>}/>
+
         <Route path='/Statusi' exact element={<HomeStatusi/>}/>
         <Route path="/Statusi/createStatusi" exact element={<CreateStatusi/>}/>
         <Route path="/Statusi/editStatusi/:id" exact element={<EditStatusi/>}/>
         <Route path="/Statusi/deleteStatusi/:id" exact element={<DeleteStatusi/>}/>
+
+        <Route path='/Vozila' exact element={<HomeVozila/>}/>
+        <Route path="/Vozila/createVozila" exact element={<CreateVozila/>}/>
+        <Route path="/Vozila/editVozila/:id" exact element={<EditVozila/>}/>
+
         <Route path="*" Component={()=>(<div>Тражена страница не постоји, направили сте грешку!</div>)} />
       </Routes> 
     </BrowserRouter>
     </div>
   );
 }
+        //<Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
 
 export default App;

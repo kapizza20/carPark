@@ -27,7 +27,7 @@ class NewStatusiForm extends React.Component{
          */
         <div className={className}>
             <label>{label}</label>
-            <input placeholder="(Ispravno)" {...input}/>
+            <input placeholder="(Исправно...)" {...input}/>
             {this.renderError(meta)}
         </div>
         
@@ -47,7 +47,7 @@ class NewStatusiForm extends React.Component{
       return (
          <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
             <Field label="Унеси назив statusa" name="NazivStatusa" component={this.renderInput}/>
-            <button className="ui button primary">Unesi</button>
+            <button className="ui button primary">Унеси</button>
          </form>
       )
    }
@@ -58,11 +58,11 @@ const validate=(formValues)=>{
    
    const errors={};
    if(!formValues.NazivStatusa){
-      errors.NazivStatusa="Morate uneti naziv marke";
+      errors.NazivStatusa="Mорате унети назив статуса";
    }
    if(formValues.NazivStatusa){
    if(formValues.NazivStatusa.length>20){
-      errors.NazivStatusa="Naziv statusa mora biti manji od 20 karaktera";
+      errors.NazivStatusa="Назив статуса мора бити мањи од 20 карактера";
    }
   
    }

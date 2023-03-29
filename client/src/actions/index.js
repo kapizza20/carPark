@@ -1,5 +1,5 @@
 import {FETCH_MARKE, CREATE_MARKE, FETCH_MARKU,UPDATE_MARKE, DELETE_MARKE,
-     CREATE_TIPOVI,FETCH_TIPOVI,FETCH_TIP,DELETE_TIPOVI,UPDATE_TIPOVI, FETCH_STATUSI, CREATE_STATUSI, FETCH_STATUS, UPDATE_STATUSI, DELETE_STATUSI} from './types';
+     CREATE_TIPOVI,FETCH_TIPOVI,FETCH_TIP,DELETE_TIPOVI,UPDATE_TIPOVI, FETCH_STATUSI, CREATE_STATUSI, FETCH_STATUS, UPDATE_STATUSI, DELETE_STATUSI, FETCH_VOZILA, CREATE_VOZILA, FETCH_VOZILO, UPDATE_VOZILA, DELETE_VOZILA} from './types';
 import axios from "axios";
 
 const PORT='localhost:3001';
@@ -32,6 +32,7 @@ export const deleteMarke=(id)=>async dispatch=>{
     dispatch({type:DELETE_MARKE, payload:id})
 }
 
+//! ************************************TIPOVI**************************************
 
 export const fetchTipovi=()=> async dispatch=>{
     const response=await axios.get(`http://${PORT}/tipovi`)
@@ -61,6 +62,8 @@ export const deleteTipovi=(id)=>async dispatch=>{
     dispatch({type:DELETE_TIPOVI, payload:id})
 }
 
+//! ************************************STATUSI**************************************
+
 export const fetchStatusi=()=> async dispatch=>{
     const response=await axios.get(`http://${PORT}/statusi`)
         dispatch({type:FETCH_STATUSI, payload:response.data})
@@ -87,4 +90,34 @@ export const deleteStatusi=(id)=>async dispatch=>{
     //console.log(id);
     const response=await axios.delete(`http://${PORT}/statusi/delete/${id}`,{id});
     dispatch({type:DELETE_STATUSI, payload:id})
+}
+
+//! *************************************VOZILA**************************************
+
+export const fetchVozila=()=> async dispatch=>{
+    const response=await axios.get(`http://${PORT}/vozila`)
+        dispatch({type:FETCH_VOZILA, payload:response.data})
+    //console.log(response); -> promise
+}
+
+export const createVozila=(formValues)=>async dispatch=>{
+    const response=await axios.post(`http://${PORT}/vozila`,{...formValues})
+        dispatch({type:CREATE_VOZILA, payload:response.data})
+}
+
+export const fetchVozilo=(id)=> async dispatch=>{
+    const response=await axios.get(`http://${PORT}/vozila/edit/${id}`);
+        dispatch({type:FETCH_VOZILO,payload:response.data}); 
+}
+
+export const updateVozila=(id,formValues)=>async dispatch=>{
+    const response=await axios.patch(`http://${PORT}/vozila/edit/${id}`,{...formValues});
+    //console.log(response.config.data);
+    dispatch({type:UPDATE_VOZILA, payload:{res:response.config.data,id:id}})
+}
+
+export const deleteVozila=(id)=>async dispatch=>{
+    //console.log(id);
+    const response=await axios.delete(`http://${PORT}/vozila/delete/${id}`,{id});
+    dispatch({type:DELETE_VOZILA, payload:id})
 }

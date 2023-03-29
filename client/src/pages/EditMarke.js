@@ -24,7 +24,7 @@ class EditMarke extends React.Component{
       }
       return (
          <div className="ui container">
-            <h3>Izmena marke</h3>
+            <h3>Измена марке</h3>
             <NewMarkeForme initialValues={_.pick(this.props.marka,'NazivMarke')}
              onSubmit={this.onSubmit}/>
          </div>

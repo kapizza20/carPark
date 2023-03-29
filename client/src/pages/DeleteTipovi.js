@@ -14,22 +14,22 @@ class DeleteTipovi extends React.Component{
       if(!this.props.tip){
          return 'Loading...'
       }
-      return `Da li ste sigurni da zelite da obrisete: ${this.props.tip.NazivTipa}?`
+      return `Да ли сте сигурни да желите да обришете: ${this.props.tip.NazivTipa}?`
    }
 
    renderActions(){
       const id=this.props.params.id;
       return(
       <React.Fragment>
-         <button onClick={()=>{this.props.deleteTipovi(id);this.props.navigate('/tipovi');}} className="ui button negative">Delete</button>
-         <Link to={'/tipovi'} className="ui button">Cancel</Link>
+         <button onClick={()=>{this.props.deleteTipovi(id);this.props.navigate('/tipovi');}} className="ui button negative">Обриши</button>
+         <Link to={'/tipovi'} className="ui button">Одустани</Link>
       </React.Fragment>)
    }
 
    render(){
       return (
          <Modal
-            title="Obrisi tip vozila:"
+            title="Обриши тип:"
             content={this.renderContent()}
             actions={this.renderActions()}
             onDismiss={()=> this.props.navigate('/tipovi')}

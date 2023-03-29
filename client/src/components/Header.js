@@ -9,6 +9,7 @@ const Header=()=>{
                 <Link className="item" to="/marke">Марке</Link>
                 <Link className="item" to="/tipovi">Типови</Link>
                 <Link className="item" to='/statusi'>Статуси</Link>
+                <Link className="item" to='/vozila'>Возила</Link>
             </div>
             <div className="right menu">
                 <a className="ui item">

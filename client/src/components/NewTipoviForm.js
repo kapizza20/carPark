@@ -27,7 +27,7 @@ class NewTipoviForm extends React.Component{
          */
         <div className={className}>
             <label>{label}</label>
-            <input placeholder="(Putnicko)" {...input}/>
+            <input placeholder="(Путничко...)" {...input}/>
             {this.renderError(meta)}
         </div>
         
@@ -47,7 +47,7 @@ class NewTipoviForm extends React.Component{
       return (
          <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
             <Field label="Унеси назив типа" name="NazivTipa" component={this.renderInput}/>
-            <button className="ui button primary">Unesi</button>
+            <button className="ui button primary">Унеси</button>
          </form>
       )
    }
@@ -59,12 +59,12 @@ const validate=(formValues)=>{
    const errors={};
    if(!formValues.NazivTipa){
       //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
-      errors.NazivTipa="Morate uneti naziv marke";
+      errors.NazivTipa="Морате унети назив типа";
    }
    if(formValues.NazivTipa){
    if(formValues.NazivTipa.length>20){
       //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju
-      errors.NazivTipa="Naziv marke mora biti manji od 20 karaktera";
+      errors.NazivTipa="Назив типа мора бити мањи од 20 карактера";
    }
    // if(formValues.NazivTipa.replace("<", '')){
    //    //errors pa njegovi atributi moraju da se slazu sa imenima onog sto validitiraju

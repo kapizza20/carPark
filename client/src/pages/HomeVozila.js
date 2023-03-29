@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux"
-import { fetchMarke } from "../actions";
+import { fetchVozila } from "../actions";
 import {Link} from "react-router-dom";
 import ReactPaginate from "react-paginate"
 
 
 const itemsPerPage=10;
-class HomeMarke extends React.Component{
+class HomeVozila extends React.Component{
   state={itemOffset:0,
   endOffSet:10,
   searchWord:""
@@ -17,30 +17,28 @@ class HomeMarke extends React.Component{
   //             setListOfMarke(response.data);
   //         })
   // },[]);
-  renderAdmin(marke){
-   return(
-     <td style={{textAlign:"center"}}>
-      <Link to={`/marke/editMarke/${marke.IDMarkeVozila}`} className="ui button primary">
+  renderAdmin(vozila){
+   return(<td style={{textAlign:"center"}}>
+    <Link to={`/vozila/editvozila/${vozila.IDVozila}`} className="ui button primary">
           Измени
       </Link>
-      <Link to={`/marke/deleteMarke/${marke.IDMarkeVozila}`} className="ui button negative">
+      <Link to={`/vozila/deletevozila/${vozila.IDVozila}`} className="ui button negative">
           Обриши
       </Link>
-    </td>
+   </td>
   );
    }
 
   componentDidMount(){
-    this.props.fetchMarke();
+    this.props.fetchVozila();
   }
 
   renderList=()=>{
     
-    let markePerPage=null;
-    let reducedMarke=null;
-    //uzmes searchword sortiras marke i lupis slice
+    let vozilaPerPage=null;
+    let reducedvozila=null;
     if(!this.state.searchWord){
-      markePerPage=this.props.marke.slice(this.state.itemOffset, this.state.endOffSet); 
+      vozilaPerPage=this.props.vozila.slice(this.state.itemOffset, this.state.endOffSet); 
     }else{
     // const timeoutID=setTimeout(()=>{
 		// 	if (this.state.searchWord) {
@@ -51,15 +49,16 @@ class HomeMarke extends React.Component{
 		// return ()=>{
 		// 	clearTimeout(timeoutID)
 		// }
-    reducedMarke=this.props.marke.filter(item=>item.NazivMarke.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`));
-    console.log(reducedMarke);
-    markePerPage=reducedMarke.slice(this.state.itemOffset, this.state.endOffSet); 
+    reducedvozila=this.props.vozila.filter(item=>item.OznakaTablica.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`));
+    //console.log(reducedvozila);
+    vozilaPerPage=reducedvozila.slice(this.state.itemOffset, this.state.endOffSet); 
   }
-  return markePerPage.map((marka)=>{
+  return vozilaPerPage.map((vozilo)=>{
     return (
-    <tr key={marka.IDMarkeVozila} className="error">
-      <td>{marka.NazivMarke}</td>
-      {this.renderAdmin(marka)}
+    <tr key={vozilo.IDVozila} className="error">
+      <td>{vozilo.OznakaTablica}</td>
+      <td>{vozilo.VINBroj}</td>
+      {this.renderAdmin(vozilo)}
     </tr>
     )
   })
@@ -68,7 +67,7 @@ class HomeMarke extends React.Component{
   handlePageChange=async (event)=>{
     console.log(event.selected,this.state.itemOffset,this.state.endOffSet)
     //on click pomeri pageCount i tako pomeri sve ostalo
-    await this.setState({itemOffset:(event.selected * itemsPerPage) % this.props.marke.length});
+    await this.setState({itemOffset:(event.selected * itemsPerPage) % this.props.vozila.length});
     await this.setState({endOffSet:this.state.itemOffset+itemsPerPage});
   }
 
@@ -77,14 +76,14 @@ class HomeMarke extends React.Component{
   }
 
   render (){
-    const items=this.props.marke.length;
+    const items=this.props.vozila.length;
     const pageCount=Math.ceil(items/itemsPerPage);
     return(
     
     <div className="ui container">
     <div className="ui menu">
     <div className="item">
-    <Link className="item" to="/marke/createMarke">Унеси нову марку</Link>
+    <Link className="item" to="/vozila/createvozila">Унеси нови тип</Link>
     </div>
     </div>
     <div className="ui search">
@@ -94,12 +93,12 @@ class HomeMarke extends React.Component{
       <input value={this.state.searchWord} onChange={(e) => {this.setState({searchWord:`${e.target.value}`})}} className="prompt" type="text" placeholder="Претрага..."></input>
       <i className="search icon"></i>
       <button onClick={this.onSearchSubmit()} className="ui button" type="submit" >Претражи</button>
-      
     </div>
     <table className="ui selectable celled table">
       <thead>
         <tr>
-          <th style={{textAlign:"center"}}>Назив марке</th>
+          <th style={{textAlign:"center"}}>Регистрациона ознака</th>
+          <th style={{textAlign:"center"}}>VIN број</th>
           <th style={{textAlign:"center"}}>Функције</th>
         </tr>
       </thead>
@@ -136,8 +135,8 @@ class HomeMarke extends React.Component{
 
 const mapStateToProps=(state)=>{
   return{
-    marke: Object.values(state.marke)
+    vozila: Object.values(state.vozila)
   }
 }
 
-export default connect(mapStateToProps,{ fetchMarke })(HomeMarke);
+export default connect(mapStateToProps,{ fetchVozila })(HomeVozila);
