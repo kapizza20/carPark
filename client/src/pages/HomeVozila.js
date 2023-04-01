@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import { fetchVozila } from "../actions";
+import { fetchVozila,fetchMarke,fetchStatusi,fetchTipovi } from "../actions";
 import {Link} from "react-router-dom";
 import ReactPaginate from "react-paginate"
 
@@ -29,8 +29,12 @@ class HomeVozila extends React.Component{
   );
    }
 
-  componentDidMount(){
-    this.props.fetchVozila();
+  componentDidMount= async() =>{
+    await this.props.fetchMarke();
+    await this.props.fetchStatusi();
+    await this.props.fetchTipovi();
+    await this.props.fetchVozila(); 
+    
   }
 
   renderList=()=>{
@@ -49,20 +53,30 @@ class HomeVozila extends React.Component{
 		// return ()=>{
 		// 	clearTimeout(timeoutID)
 		// }
-    reducedvozila=this.props.vozila.filter(item=>item.OznakaTablica.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`));
+    reducedvozila=this.props.vozila.filter(
+      item=>item.OznakaTablica.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)  ||
+      item.VINBroj.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.statusi.find(e=>e.IDStatusa===item.IDStatusa).NazivStatusa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.marke.find(e=>e.IDMarkeVozila===item.IDMarkeVozila).NazivMarke.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.tipovi.find(e=>e.IDTipa===item.IDTipa).NazivTipa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)
+      );
     //console.log(reducedvozila);
     vozilaPerPage=reducedvozila.slice(this.state.itemOffset, this.state.endOffSet); 
   }
   return vozilaPerPage.map((vozilo)=>{
     return (
-    <tr key={vozilo.IDVozila} className="error">
+    <tr key={vozilo.IDVozila} className={`${this.props.statusi.find(e=>e.NazivStatusa==="Neispravno").IDStatusa===vozilo.IDStatusa ? 'error border border-danger':''}`}>
       <td>{vozilo.OznakaTablica}</td>
       <td>{vozilo.VINBroj}</td>
+      <td>{this.props.statusi ? this.props.statusi.find(e=>e.IDStatusa===vozilo.IDStatusa).NazivStatusa : "Loading..."}</td>
+      <td>{this.props.marke ? this.props.marke.find(e=>e.IDMarkeVozila===vozilo.IDMarkeVozila).NazivMarke : "Loading..."}</td>
+      <td>{this.props.tipovi ? this.props.tipovi.find(e=>e.IDTipa===vozilo.IDTipa).NazivTipa : "Loading..."}</td>
       {this.renderAdmin(vozilo)}
     </tr>
     )
   })
 }
+// <td>{this.state.statusi.find(e=>vozilo.IDStatusa==e.IDStatusa).NazivStatusa}</td>
 
   handlePageChange=async (event)=>{
     console.log(event.selected,this.state.itemOffset,this.state.endOffSet)
@@ -83,7 +97,7 @@ class HomeVozila extends React.Component{
     <div className="ui container">
     <div className="ui menu">
     <div className="item">
-    <Link className="item" to="/vozila/createvozila">Унеси нови тип</Link>
+    <Link className="item" to="/vozila/createvozila">Унеси новo возило</Link>
     </div>
     </div>
     <div className="ui search">
@@ -99,6 +113,9 @@ class HomeVozila extends React.Component{
         <tr>
           <th style={{textAlign:"center"}}>Регистрациона ознака</th>
           <th style={{textAlign:"center"}}>VIN број</th>
+          <th style={{textAlign:"center"}}>Статус</th>
+          <th style={{textAlign:"center"}}>Марка</th>
+          <th style={{textAlign:"center"}}>Тип</th>
           <th style={{textAlign:"center"}}>Функције</th>
         </tr>
       </thead>
@@ -135,8 +152,11 @@ class HomeVozila extends React.Component{
 
 const mapStateToProps=(state)=>{
   return{
-    vozila: Object.values(state.vozila)
+    vozila: Object.values(state.vozila),
+    marke: Object.values(state.marke),
+    statusi: Object.values(state.statusi),
+    tipovi: Object.values(state.tipovi)
   }
 }
 
-export default connect(mapStateToProps,{ fetchVozila })(HomeVozila);
+export default connect(mapStateToProps,{ fetchVozila,fetchMarke,fetchStatusi,fetchTipovi })(HomeVozila);

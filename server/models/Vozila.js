@@ -20,8 +20,8 @@ module.exports=(sequelize,DataTypes)=>{
     });
 
 
-    Vozila.associate = function (model) {
-       Vozila.belongsTo(model.MarkeVozila,{
+    Vozila.associate = function (models) {
+       Vozila.belongsTo(models.MarkeVozila,{
          foreignKey: {
          name: 'IDMarkeVozila',
          type: DataTypes.INTEGER,
@@ -30,7 +30,7 @@ module.exports=(sequelize,DataTypes)=>{
          onDelete:"CASCADE",
          onUpdate:"CASCADE"
       });
-      Vozila.belongsTo(model.TipoviVozila,{
+      Vozila.belongsTo(models.TipoviVozila,{
          foreignKey: {
          name: 'IDTipa',
          type: DataTypes.INTEGER,
@@ -39,7 +39,7 @@ module.exports=(sequelize,DataTypes)=>{
          onDelete:"CASCADE",
          onUpdate:"CASCADE"
       });
-      Vozila.belongsTo(model.StatusVozila,{
+      Vozila.belongsTo(models.StatusVozila,{
          foreignKey: {
          name: 'IDStatusa',
          type: DataTypes.INTEGER,
@@ -47,7 +47,16 @@ module.exports=(sequelize,DataTypes)=>{
       },
          onDelete:"CASCADE",
          onUpdate:"CASCADE"
-      })
+      });
+      Vozila.hasMany(models.Evidencija,{
+         foreignKey: {
+         name: 'IDVozila',
+         type: DataTypes.INTEGER,
+         allowNull:false
+      },
+        onDelete:"CASCADE",
+        onUpdate:"CASCADE"
+      });
     };
     
 

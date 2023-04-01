@@ -49,6 +49,7 @@ const App=()=> {
         <Route path='/Vozila' exact element={<HomeVozila/>}/>
         <Route path="/Vozila/createVozila" exact element={<CreateVozila/>}/>
         <Route path="/Vozila/editVozila/:id" exact element={<EditVozila/>}/>
+        <Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
 
         <Route path="*" Component={()=>(<div>Тражена страница не постоји, направили сте грешку!</div>)} />
       </Routes> 
@@ -56,6 +57,6 @@ const App=()=> {
     </div>
   );
 }
-        //<Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
+        
 
 export default App;

@@ -14,11 +14,17 @@ const markeRouter=require('./routes/MarkeVozila.js');
 const tipoviRouter=require('./routes/TipoviVozila');
 const statusiRouter=require('./routes/StatusiVozila');
 const vozilaRouter=require('./routes/Vozila.js');
+const cinoviRouter=require('./routes/Cinovi.js');
+const vozaciRouter=require('./routes/Vozaci.js');
+const evidencijaRouter=require('./routes/Evidencija.js');
 
 app.use('/marke',markeRouter);
 app.use('/tipovi',tipoviRouter);
 app.use('/statusi',statusiRouter);
 app.use('/vozila',vozilaRouter);
+app.use('/cinovi',cinoviRouter);
+app.use('/vozaci',vozaciRouter);
+app.use('/evidencija',evidencijaRouter);
 
 
 //Port je ili 3001 ili onaj koji nam je sam zadat od strane neceg sa strane

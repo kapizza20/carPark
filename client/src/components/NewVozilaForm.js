@@ -42,7 +42,9 @@ class NewVozilaForm extends React.Component{
       options.forEach(element => {
          //console.log(element);
          //console.log(element[input.name]) //Uzeo sam ID od elementa
-         labelForInit=options.find(e=>(e[input.name]==input.value))[OptionLab];
+         if(input.value){
+         labelForInit=options.find(e=>(e[input.name]===input.value))[OptionLab];
+         }
          //console.log(a);
          // console.log(element[OptionLab]);
          // console.log(options.find(e => e[input.name]==input.value));
