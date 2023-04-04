@@ -23,6 +23,17 @@ import CreateVozila from './pages/CreateVozila';
 import EditVozila from './pages/EditVozila';
 import DeleteVozila from './pages/DeleteVozila';
 
+import HomeCinovi from './pages/HomeCinovi';
+import CreateCinovi from './pages/CreateCinovi';
+import EditCinovi from './pages/EditCinovi';
+import DeleteCinovi from './pages/DeleteCinovi';
+
+import HomeVozaci from './pages/HomeVozaci';
+import CreateVozaci from './pages/CreateVozaci';
+import EditVozaci from './pages/EditVozaci';
+import DeleteVozaci from './pages/DeleteVozaci';
+
+
 const App=()=> {
 
   return (
@@ -51,12 +62,28 @@ const App=()=> {
         <Route path="/Vozila/editVozila/:id" exact element={<EditVozila/>}/>
         <Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
 
+        <Route path='/Cinovi' exact element={<HomeCinovi/>}/>
+        <Route path="/Cinovi/createCinovi" exact element={<CreateCinovi/>}/>
+        <Route path="/Cinovi/editCinovi/:id" exact element={<EditCinovi/>}/>
+        <Route path="/Cinovi/deleteCinovi/:id" exact element={<DeleteCinovi/>}/>
+
+        <Route path='/Vozaci' exact element={<HomeVozaci/>}/>
+        <Route path="/Vozaci/createVozaci" exact element={<CreateVozaci/>}/>
+        <Route path="/Vozaci/editVozaci/:id" exact element={<EditVozaci/>}/>
+        <Route path="/Vozaci/deleteVozaci/:id" exact element={<DeleteVozaci/>}/>
+
+
         <Route path="*" Component={()=>(<div>Тражена страница не постоји, направили сте грешку!</div>)} />
       </Routes> 
     </BrowserRouter>
     </div>
   );
 }
+
+/*
+
+        
+*/ 
         
 
 export default App;

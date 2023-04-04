@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {createMarke} from '../actions';
-import NewMarkeForm from '../components/NewMarkeForm';
+import {createCinovi} from '../actions';
+import NewCinoviForm from '../components/NewCinoviForm';
 import withRouter from '../components/WithRouter';
 
 
-class CreateMarke extends React.Component{
+class CreateCinovi extends React.Component{
     onSubmit=(formValues)=>{
       //formValues sadrzi sve podatke forme sa njihovim name propertijem
       //console.log(formValues);
-      this.props.createMarke(formValues);
-      this.props.navigate('/marke');
+      this.props.createCinovi(formValues);
+      this.props.navigate('/cinovi');
     }
 
    
@@ -18,11 +18,11 @@ class CreateMarke extends React.Component{
     render(){
         return (
         <div className='ui container'>
-         <h3>Нова марка</h3>
-         <NewMarkeForm onSubmit={this.onSubmit}></NewMarkeForm>
+         <h3>Нови чин</h3>
+         <NewCinoviForm onSubmit={this.onSubmit}></NewCinoviForm>
         </div>
       )
     }
 }
 
-export default withRouter(connect(null,{createMarke})(CreateMarke));
+export default withRouter(connect(null,{createCinovi})(CreateCinovi));

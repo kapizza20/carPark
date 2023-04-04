@@ -8,11 +8,11 @@ module.exports=(sequelize,DataTypes)=>{
         primaryKey: true
       },
       ImeVozaca:{
-        type:DataTypes.STRING(10),
+        type:DataTypes.STRING(20),
         allowNull:false
       },
       PrezimeVozaca:{
-        type:DataTypes.STRING(17),
+        type:DataTypes.STRING(20),
         allowNull:false
       },
       JMBG:{

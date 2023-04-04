@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux"
-import { fetchCinovi } from "../actions";
+import { fetchVozaci,fetchCinovi } from "../actions";
 import {Link} from "react-router-dom";
 import ReactPaginate from "react-paginate"
 
 
 const itemsPerPage=10;
-class HomeCinovi extends React.Component{
+class HomeVozaci extends React.Component{
   state={itemOffset:0,
   endOffSet:10,
   searchWord:""
@@ -17,29 +17,30 @@ class HomeCinovi extends React.Component{
   //             setListOfMarke(response.data);
   //         })
   // },[]);
-  renderAdmin(cinovi){
-   return(
-     <td style={{textAlign:"center"}}>
-      <Link to={`/cinovi/editcinovi/${cinovi.IDCina}`} className="ui button primary">
+  renderAdmin(vozaci){
+   return(<td style={{textAlign:"center"}}>
+    <Link to={`/vozaci/editvozaci/${vozaci.IDVozaca}`} className="ui button primary">
           Измени
       </Link>
-      <Link to={`/cinovi/deletecinovi/${cinovi.IDCina}`} className="ui button negative">
+      <Link to={`/vozaci/deletevozaci/${vozaci.IDVozaca}`} className="ui button negative">
           Обриши
       </Link>
-    </td>
+   </td>
   );
    }
 
-  componentDidMount(){
-    this.props.fetchCinovi();
+  componentDidMount= async() =>{
+    await this.props.fetchCinovi();
+    await this.props.fetchVozaci();
+    
   }
 
   renderList=()=>{
-    let cinoviPerPage=null;
-    let reducedcinovi=null;
-    //uzmes searchword sortiras cinovi i lupis slice
+    
+    let vozaciPerPage=null;
+    let reducedVozaci=null;
     if(!this.state.searchWord){
-      cinoviPerPage=this.props.cinovi.slice(this.state.itemOffset, this.state.endOffSet); 
+      vozaciPerPage=this.props.vozaci.slice(this.state.itemOffset, this.state.endOffSet); 
     }else{
     // const timeoutID=setTimeout(()=>{
 		// 	if (this.state.searchWord) {
@@ -50,24 +51,35 @@ class HomeCinovi extends React.Component{
 		// return ()=>{
 		// 	clearTimeout(timeoutID)
 		// }
-    reducedcinovi=this.props.cinovi.filter(item=>item.NazivCina.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`));
-    console.log(reducedcinovi);
-    cinoviPerPage=reducedcinovi.slice(this.state.itemOffset, this.state.endOffSet); 
+    reducedVozaci=this.props.vozaci.filter(
+      item=>item.ImeVozaca.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)  ||
+      item.PrezimeVozaca.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      item.JMBG.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      item.BrojTel.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.cinovi.find(e=>e.IDCina===item.IDCina).NazivCina.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)
+      );
+    //console.log(reducedVozaci);
+    vozaciPerPage=reducedVozaci.slice(this.state.itemOffset, this.state.endOffSet); 
   }
-  return cinoviPerPage.map((cin)=>{
+  return vozaciPerPage.map((item)=>{
     return (
-    <tr key={cin.IDCina} className="">
-      <td>{cin.NazivCina}</td>
-      {this.renderAdmin(cin)}
+    <tr key={item.IDVozaca}>
+      <td>{item.ImeVozaca}</td>
+      <td>{item.PrezimeVozaca}</td>
+      <td>{item.JMBG}</td>
+      <td>{item.BrojTel}</td>
+      <td>{this.props.cinovi ? this.props.cinovi.find(e=>e.IDCina===item.IDCina).NazivCina : "Loading..."}</td>
+      {this.renderAdmin(item)}
     </tr>
     )
   })
 }
+// <td>{this.state.statusi.find(e=>vozilo.IDStatusa==e.IDStatusa).NazivStatusa}</td>
 
   handlePageChange=async (event)=>{
     console.log(event.selected,this.state.itemOffset,this.state.endOffSet)
     //on click pomeri pageCount i tako pomeri sve ostalo
-    await this.setState({itemOffset:(event.selected * itemsPerPage) % this.props.cinovi.length});
+    await this.setState({itemOffset:(event.selected * itemsPerPage) % this.props.vozaci.length});
     await this.setState({endOffSet:this.state.itemOffset+itemsPerPage});
   }
 
@@ -76,14 +88,14 @@ class HomeCinovi extends React.Component{
   }
 
   render (){
-    const items=this.props.cinovi.length;
+    const items=this.props.vozaci.length;
     const pageCount=Math.ceil(items/itemsPerPage);
     return(
     
     <div className="ui container">
     <div className="ui menu">
     <div className="item">
-    <Link className="item" to="/cinovi/createcinovi">Унеси нови чин</Link>
+    <Link className="item" to="/vozaci/createvozaci">Унеси новог возача</Link>
     </div>
     </div>
     <div className="ui search">
@@ -93,12 +105,15 @@ class HomeCinovi extends React.Component{
       <input value={this.state.searchWord} onChange={(e) => {this.setState({searchWord:`${e.target.value}`})}} className="prompt" type="text" placeholder="Претрага..."></input>
       <i className="search icon"></i>
       <button onClick={this.onSearchSubmit()} className="ui button" type="submit" >Претражи</button>
-      
     </div>
     <table className="ui selectable celled table">
       <thead>
         <tr>
-          <th style={{textAlign:"center"}}>Назив чина</th>
+          <th style={{textAlign:"center"}}>Име</th>
+          <th style={{textAlign:"center"}}>Презиме</th>
+          <th style={{textAlign:"center"}}>ЈМБГ</th>
+          <th style={{textAlign:"center"}}>Број телефона</th>
+          <th style={{textAlign:"center"}}>Чин</th>
           <th style={{textAlign:"center"}}>Функције</th>
         </tr>
       </thead>
@@ -135,8 +150,9 @@ class HomeCinovi extends React.Component{
 
 const mapStateToProps=(state)=>{
   return{
-    cinovi: Object.values(state.cinovi)
+    vozaci: Object.values(state.vozaci),
+    cinovi: Object.values(state.cinovi),
   }
 }
 
-export default connect(mapStateToProps,{ fetchCinovi })(HomeCinovi);
+export default connect(mapStateToProps,{ fetchCinovi,fetchVozaci })(HomeVozaci);
