@@ -24,7 +24,7 @@ app.use('/statusi',statusiRouter);
 app.use('/vozila',vozilaRouter);
 app.use('/cinovi',cinoviRouter);
 app.use('/vozaci',vozaciRouter);
-app.use('/evidencija',evidencijaRouter);
+app.use('/evidencije',evidencijaRouter);
 
 
 //Port je ili 3001 ili onaj koji nam je sam zadat od strane neceg sa strane

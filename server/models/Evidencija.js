@@ -12,12 +12,12 @@ module.exports=(sequelize,DataTypes)=>{
         allowNull:false
       },
       DatumIzlaska:{
-        type:DataTypes.DATE,
+        type:DataTypes.DATEONLY,
         allowNull:false
       },
       DatumPovratka:{
-        type:DataTypes.DATE,
-        allowNull:false
+        type:DataTypes.DATEONLY,
+        allowNull:true
       }
     });
 

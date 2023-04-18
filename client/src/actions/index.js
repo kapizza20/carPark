@@ -191,29 +191,29 @@ export const deleteVozaci=(id)=>async dispatch=>{
 //! ******************************EVIDENCIJA**********************************
 
 export const fetchEvidencije=()=> async dispatch=>{
-    const response=await axios.get(`http://${PORT}/evidencija`)
+    const response=await axios.get(`http://${PORT}/evidencije`)
         dispatch({type:FETCH_EVIDENCIJE, payload:response.data})
     //console.log(response); -> promise
 }
 
 export const createEvidencije=(formValues)=>async dispatch=>{
-    const response=await axios.post(`http://${PORT}/evidencija`,{...formValues})
+    const response=await axios.post(`http://${PORT}/evidencije`,{...formValues})
         dispatch({type:CREATE_EVIDENCIJE, payload:response.data})
 }
 
 export const fetchEvidencija=(id)=> async dispatch=>{
-    const response=await axios.get(`http://${PORT}/evidencija/edit/${id}`);
+    const response=await axios.get(`http://${PORT}/evidencije/edit/${id}`);
         dispatch({type:FETCH_EVIDENCIJA,payload:response.data}); 
 }
 
 export const updateEvidencije=(id,formValues)=>async dispatch=>{
-    const response=await axios.patch(`http://${PORT}/evidencija/edit/${id}`,{...formValues});
+    const response=await axios.patch(`http://${PORT}/evidencije/edit/${id}`,{...formValues});
     //console.log(response.config.data);
     dispatch({type:UPDATE_EVIDENCIJE, payload:{res:response.config.data,id:id}})
 }
 
 export const deleteEvidencije=(id)=>async dispatch=>{
     //console.log(id);
-    const response=await axios.delete(`http://${PORT}/evidencija/delete/${id}`,{id});
+    const response=await axios.delete(`http://${PORT}/evidencije/delete/${id}`,{id});
     dispatch({type:DELETE_EVIDENCIJE, payload:id})
 }

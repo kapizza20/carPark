@@ -33,6 +33,11 @@ import CreateVozaci from './pages/CreateVozaci';
 import EditVozaci from './pages/EditVozaci';
 import DeleteVozaci from './pages/DeleteVozaci';
 
+import HomeEvidencije from './pages/HomeEvidencije';
+import CreateEvidencije from './pages/CreateEvidencije';
+import EditEvidencije from './pages/EditEvidencije';
+import DeleteEvidencije from './pages/DeleteEvidencije';
+
 
 const App=()=> {
 
@@ -72,6 +77,10 @@ const App=()=> {
         <Route path="/Vozaci/editVozaci/:id" exact element={<EditVozaci/>}/>
         <Route path="/Vozaci/deleteVozaci/:id" exact element={<DeleteVozaci/>}/>
 
+        <Route path='/evidencije' exact element={<HomeEvidencije/>}/>
+        <Route path="/evidencije/createevidencije" exact element={<CreateEvidencije/>}/>
+        <Route path="/evidencije/deleteevidencije/:id" exact element={<DeleteEvidencije/>}/>
+        <Route path="/evidencije/editevidencije/:id" exact element={<EditEvidencije/>}/>
 
         <Route path="*" Component={()=>(<div>Тражена страница не постоји, направили сте грешку!</div>)} />
       </Routes> 

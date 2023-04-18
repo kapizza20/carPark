@@ -12,7 +12,7 @@ const Header=()=>{
                 <Link className="item" to='/vozila'>Возила</Link>
                 <Link className="item" to='/cinovi'>Чинови</Link>
                 <Link className="item" to='/vozaci'>Возачи</Link>
-                <Link className="item" to='/evidencija'>Евиденција</Link>
+                <Link className="item" to='/evidencije'>Евиденција</Link>
             </div>
             <div className="right menu">
                 <a className="ui item">
