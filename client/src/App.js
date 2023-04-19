@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
-import Header from './components/Header.js';
 
 import HomeMarke from './pages/HomeMarke.js';
 import CreateMarke from './pages/CreateMarke';
@@ -39,50 +38,68 @@ import EditEvidencije from './pages/EditEvidencije';
 import DeleteEvidencije from './pages/DeleteEvidencije';
 
 
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+import RequireAuth from './components/RequireAuth';
+import HeaderAdmin from './components/HeaderAdmin';
+import Pocetna from './pages/Pocetna';
+import Nepostojaca from './pages/Nepostojaca';
+
+import useAuth from './hooks/useAuth';
+
 const App=()=> {
-
+  const {auth}=useAuth();
   return (
-    <div className="App">
+    <div className='App'>
     <BrowserRouter >
-      <Header/>
+      <HeaderAdmin dozvola={[1,2]}/>
       <Routes>
-        <Route path="/" Component={()=>(<div>Dobrodosli</div>)}/>
-        <Route path="/marke" exact element={<HomeMarke/>} />
-        <Route path="/marke/createMarke" exact element={<CreateMarke/>}/>
-        <Route path="/marke/editMarke/:id" exact element={<EditMarke/>}/>
-        <Route path="/marke/deleteMarke/:id" exact element={<DeleteMarke/>}/>
+        <Route path="/" exact element={<Pocetna user={auth?.Username}/>}/>
+        <Route element={<RequireAuth dozvola={[1,2]}/>}>
+          <Route path='/evidencije' exact element={<HomeEvidencije/>}/>
+          <Route path="/evidencije/createevidencije" exact element={<CreateEvidencije/>}/>
+          <Route path="/evidencije/deleteevidencije/:id" exact element={<DeleteEvidencije/>}/>
+          <Route path="/evidencije/editevidencije/:id" exact element={<EditEvidencije/>}/>
+        </Route>
 
-        <Route path='/tipovi' exact element={<HomeTipovi/>}/>
-        <Route path="/tipovi/createTipovi" exact element={<CreateTipovi/>}/>
-        <Route path="/tipovi/editTipovi/:id" exact element={<EditTipovi/>}/>
-        <Route path="/tipovi/deleteTipovi/:id" exact element={<DeleteTipovi/>}/>
+        <Route element={<RequireAuth dozvola={[1]}/>}>
+          <Route path="/marke" exact element={<HomeMarke/>} />
+          <Route path="/marke/createMarke" exact element={<CreateMarke/>}/>
+          <Route path="/marke/editMarke/:id" exact element={<EditMarke/>}/>
+          <Route path="/marke/deleteMarke/:id" exact element={<DeleteMarke/>}/>
 
-        <Route path='/Statusi' exact element={<HomeStatusi/>}/>
-        <Route path="/Statusi/createStatusi" exact element={<CreateStatusi/>}/>
-        <Route path="/Statusi/editStatusi/:id" exact element={<EditStatusi/>}/>
-        <Route path="/Statusi/deleteStatusi/:id" exact element={<DeleteStatusi/>}/>
+          <Route path='/tipovi' exact element={<HomeTipovi/>}/>
+          <Route path="/tipovi/createTipovi" exact element={<CreateTipovi/>}/>
+          <Route path="/tipovi/editTipovi/:id" exact element={<EditTipovi/>}/>
+          <Route path="/tipovi/deleteTipovi/:id" exact element={<DeleteTipovi/>}/>
 
-        <Route path='/Vozila' exact element={<HomeVozila/>}/>
-        <Route path="/Vozila/createVozila" exact element={<CreateVozila/>}/>
-        <Route path="/Vozila/editVozila/:id" exact element={<EditVozila/>}/>
-        <Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
+          <Route path='/Statusi' exact element={<HomeStatusi/>}/>
+          <Route path="/Statusi/createStatusi" exact element={<CreateStatusi/>}/>
+          <Route path="/Statusi/editStatusi/:id" exact element={<EditStatusi/>}/>
+          <Route path="/Statusi/deleteStatusi/:id" exact element={<DeleteStatusi/>}/>
 
-        <Route path='/Cinovi' exact element={<HomeCinovi/>}/>
-        <Route path="/Cinovi/createCinovi" exact element={<CreateCinovi/>}/>
-        <Route path="/Cinovi/editCinovi/:id" exact element={<EditCinovi/>}/>
-        <Route path="/Cinovi/deleteCinovi/:id" exact element={<DeleteCinovi/>}/>
+          <Route path='/Vozila' exact element={<HomeVozila/>}/>
+          <Route path="/Vozila/createVozila" exact element={<CreateVozila/>}/>
+          <Route path="/Vozila/editVozila/:id" exact element={<EditVozila/>}/>
+          <Route path="/Vozila/deleteVozila/:id" exact element={<DeleteVozila/>}/>
 
-        <Route path='/Vozaci' exact element={<HomeVozaci/>}/>
-        <Route path="/Vozaci/createVozaci" exact element={<CreateVozaci/>}/>
-        <Route path="/Vozaci/editVozaci/:id" exact element={<EditVozaci/>}/>
-        <Route path="/Vozaci/deleteVozaci/:id" exact element={<DeleteVozaci/>}/>
+          <Route path='/Cinovi' exact element={<HomeCinovi/>}/>
+          <Route path="/Cinovi/createCinovi" exact element={<CreateCinovi/>}/>
+          <Route path="/Cinovi/editCinovi/:id" exact element={<EditCinovi/>}/>
+          <Route path="/Cinovi/deleteCinovi/:id" exact element={<DeleteCinovi/>}/>
 
-        <Route path='/evidencije' exact element={<HomeEvidencije/>}/>
-        <Route path="/evidencije/createevidencije" exact element={<CreateEvidencije/>}/>
-        <Route path="/evidencije/deleteevidencije/:id" exact element={<DeleteEvidencije/>}/>
-        <Route path="/evidencije/editevidencije/:id" exact element={<EditEvidencije/>}/>
+          <Route path='/Vozaci' exact element={<HomeVozaci/>}/>
+          <Route path="/Vozaci/createVozaci" exact element={<CreateVozaci/>}/>
+          <Route path="/Vozaci/editVozaci/:id" exact element={<EditVozaci/>}/>
+          <Route path="/Vozaci/deleteVozaci/:id" exact element={<DeleteVozaci/>}/>
 
-        <Route path="*" Component={()=>(<div>Тражена страница не постоји, направили сте грешку!</div>)} />
+          <Route path="/register" exact element={<Registration/>}/>
+        </Route>
+
+        
+        <Route path='/login' exact element={<Login/>}/>
+
+        <Route path="*" element={<Nepostojaca/>} />
       </Routes> 
     </BrowserRouter>
     </div>

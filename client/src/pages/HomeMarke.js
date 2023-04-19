@@ -57,7 +57,7 @@ class HomeMarke extends React.Component{
   }
   return markePerPage.map((marka)=>{
     return (
-    <tr key={marka.IDMarkeVozila} className="error">
+    <tr key={marka.IDMarkeVozila}>
       <td>{marka.NazivMarke}</td>
       {this.renderAdmin(marka)}
     </tr>

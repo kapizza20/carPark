@@ -56,7 +56,7 @@ class HomeTipovi extends React.Component{
   }
   return tipoviPerPage.map((tip)=>{
     return (
-    <tr key={tip.IDTipa} className="error">
+    <tr key={tip.IDTipa}>
       <td>{tip.NazivTipa}</td>
       {this.renderAdmin(tip)}
     </tr>

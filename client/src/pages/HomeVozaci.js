@@ -68,7 +68,7 @@ class HomeVozaci extends React.Component{
       <td>{item.PrezimeVozaca}</td>
       <td>{item.JMBG}</td>
       <td>{item.BrojTel}</td>
-      <td>{this.props.cinovi ? this.props.cinovi.find(e=>e.IDCina===item.IDCina).NazivCina : "Loading..."}</td>
+      <td>{this.props.cinovi ? this.props.cinovi.find(e=>e.IDCina===item.IDCina)?.NazivCina : "Loading..."}</td>
       {this.renderAdmin(item)}
     </tr>
     )

@@ -56,7 +56,7 @@ class HomeStatusi extends React.Component{
   }
   return StatusiPerPage.map((tip)=>{
     return (
-    <tr key={tip.IDStatusa} className="error">
+    <tr key={tip.IDStatusa}>
       <td>{tip.NazivStatusa}</td>
       {this.renderAdmin(tip)}
     </tr>

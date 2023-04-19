@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import {createStore, applyMiddleware, compose} from "redux";
 import reducers from "./reducers"
 import reduxThunk from 'redux-thunk'
+import {AuthProvider} from "./context/AuthProvider"
 
 const composeEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //OVO DOLAZI OD REDUX DEF TOOLS
@@ -15,9 +16,11 @@ const store=createStore(reducers,
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <AuthProvider>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

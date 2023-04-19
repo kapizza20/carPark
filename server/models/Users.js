@@ -9,7 +9,8 @@ module.exports=(sequelize,DataTypes)=>{
       },
       Username:{
         type:DataTypes.STRING(30),
-        allowNull:false
+        allowNull:false,
+        unique:true
       },
       Pwd:{
         type:DataTypes.STRING(30),

@@ -56,9 +56,9 @@ class HomeVozila extends React.Component{
     reducedvozila=this.props.vozila.filter(
       item=>item.OznakaTablica.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)  ||
       item.VINBroj.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
-      this.props.statusi.find(e=>e.IDStatusa===item.IDStatusa).NazivStatusa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
-      this.props.marke.find(e=>e.IDMarkeVozila===item.IDMarkeVozila).NazivMarke.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
-      this.props.tipovi.find(e=>e.IDTipa===item.IDTipa).NazivTipa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)
+      this.props.statusi.find(e=>e.IDStatusa===item.IDStatusa)?.NazivStatusa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.marke.find(e=>e.IDMarkeVozila===item.IDMarkeVozila)?.NazivMarke.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`) ||
+      this.props.tipovi.find(e=>e.IDTipa===item.IDTipa)?.NazivTipa.toLowerCase().includes(`${this.state.searchWord.toLowerCase()}`)
       );
     //console.log(reducedvozila);
     vozilaPerPage=reducedvozila.slice(this.state.itemOffset, this.state.endOffSet); 
@@ -68,9 +68,9 @@ class HomeVozila extends React.Component{
     <tr key={vozilo.IDVozila} className={`${this.props.statusi.find(e=>e.NazivStatusa==="Neispravno").IDStatusa===vozilo.IDStatusa ? 'error border border-danger':''}`}>
       <td>{vozilo.OznakaTablica}</td>
       <td>{vozilo.VINBroj}</td>
-      <td>{this.props.statusi ? this.props.statusi.find(e=>e.IDStatusa===vozilo.IDStatusa).NazivStatusa : "Loading..."}</td>
-      <td>{this.props.marke ? this.props.marke.find(e=>e.IDMarkeVozila===vozilo.IDMarkeVozila).NazivMarke : "Loading..."}</td>
-      <td>{this.props.tipovi ? this.props.tipovi.find(e=>e.IDTipa===vozilo.IDTipa).NazivTipa : "Loading..."}</td>
+      <td>{this.props.statusi ? this.props.statusi.find(e=>e.IDStatusa===vozilo.IDStatusa)?.NazivStatusa : "Loading..."}</td>
+      <td>{this.props.marke ? this.props.marke.find(e=>e.IDMarkeVozila===vozilo.IDMarkeVozila)?.NazivMarke : "Loading..."}</td>
+      <td>{this.props.tipovi ? this.props.tipovi.find(e=>e.IDTipa===vozilo.IDTipa)?.NazivTipa : "Loading..."}</td>
       {this.renderAdmin(vozilo)}
     </tr>
     )
