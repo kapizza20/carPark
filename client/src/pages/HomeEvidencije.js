@@ -65,7 +65,7 @@ class HomeEvidencije extends React.Component{
     <tr key={evidencije.IDEvidencije} className={evidencije.DatumPovratka == null ? 'error border border-danger':''}>
       <td>{evidencije.BrojNaloga}</td>
       <td>{evidencije.DatumIzlaska.slice(0,10)}</td>
-      <td>{evidencije.DatumPovratka==null ? "НИЈЕ СЕ ВРАТИО":evidencije.DatumPovratka.slice(0,10)  }</td>
+      <td>{evidencije.DatumPovratka==null ? "НИЈЕ СЕ ВРАТИО":evidencije.DatumPovratka?.slice(0,10)  }</td>
       <td>{this.props.vozila ? this.props.vozila.find(e=>e.IDVozila===evidencije.IDVozila)?.OznakaTablica : "Loading..."}</td>
       <td>{this.props.vozaci ? this.props.vozaci.find(e=>e.IDVozaca===evidencije.IDVozaca)?.ImeVozaca : "Loading..."}</td>
       <td>{this.props.vozaci ? this.props.vozaci.find(e=>e.IDVozaca===evidencije.IDVozaca)?.PrezimeVozaca : "Loading..."}</td>
